@@ -1,0 +1,17 @@
+variables:
+    DOCKER_REGISTRY: "reg.nic.cz"
+    # Set up pip cache shared between all jobs of the project.
+    PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+    TOX_PARALLEL_NO_SPINNER: 1
+
+cache:
+    paths:
+        - .cache/pip
+
+.py37: &py37
+    image: "$DOCKER_REGISTRY/python/tox:3.7"
+
+quality:
+    <<: *py37
+    script:
+        - tox
