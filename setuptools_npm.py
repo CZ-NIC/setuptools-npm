@@ -1,4 +1,5 @@
 """Plugin for setuptools providing npm commands."""
+import os
 import shlex
 import subprocess
 from distutils import log
@@ -86,3 +87,11 @@ class npm_run(Command):
         for script in self.script:
             log.info("-> npm run %s", script)
             subprocess.run(['npm', 'run', *shlex.split(script)], check=True)
+
+
+def npm_not_skipped(build) -> bool:
+    """Return whether npm command should be run.
+
+    This can be used as predicate in distutils sub_commands.
+    """
+    return not bool(os.environ.get('SKIP_NPM', False))
