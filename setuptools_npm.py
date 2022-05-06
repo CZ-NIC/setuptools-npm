@@ -6,7 +6,7 @@ from distutils import log
 
 from setuptools import Command
 
-__version__ = '0.1'
+__version__ = '0.2'
 
 
 # Taken from https://github.com/python-babel/babel/blob/master/babel/messages/frontend.py
